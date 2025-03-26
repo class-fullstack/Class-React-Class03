@@ -1,4 +1,4 @@
-import Home from "../pages/Home";
+import Products from "../pages/Products";
 import Contact from "../pages/Contact";
 import About from "../pages/About";
 import ProductDetail from "../pages/ProductDetail";
@@ -6,10 +6,10 @@ import ProductDetail from "../pages/ProductDetail";
 const publicRoutes = [
   {
     index: true,
-    element: <Home />,
+    element: <Products />,
   },
   {
-    path: "products/:id",
+    path: "products/:id/:slug",
     element: <ProductDetail />,
   },
   {

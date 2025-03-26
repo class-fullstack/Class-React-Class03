@@ -1,6 +1,8 @@
-import { useParams } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import React from "react";
 import axios from "axios";
+import LoadingSpinner from "../components/ui/LoadingSpinner";
+import Button from "../components/ui/Button";
 
 const styles = {
   container: {
@@ -32,24 +34,34 @@ const styles = {
     fontSize: "16px",
     marginTop: "15px",
   },
-  loading: {
-    textAlign: "center",
-    fontSize: "20px",
-    marginTop: "50px",
+  button: {
+    marginTop: "20px",
+    padding: "10px 20px",
+    fontSize: "16px",
+    borderRadius: "5px",
+    border: "none",
+    cursor: "pointer",
+    background: "#007bff",
+    color: "#fff",
   },
 };
 
 const ProductDetail = () => {
   const { id } = useParams();
-  const [product, setProduct] = useState(null);
+  const navigate = useNavigate();
+  const [product, setProduct] = React.useState(null);
+  const [isLoading, setIsLoading] = React.useState(false);
 
-  useEffect(() => {
+  React.useEffect(() => {
+    setIsLoading(true);
     axios
       .get(`https://fakestoreapi.com/products/${id}`)
       .then((response) => {
+        setIsLoading(false);
         setProduct(response.data);
       })
       .catch((error) => {
+        setIsLoading(false);
         console.error("Error fetching product:", error);
       });
     return () => {
@@ -59,12 +71,17 @@ const ProductDetail = () => {
 
   return (
     <div style={styles.container}>
+      {isLoading && <LoadingSpinner />}
       {product && (
         <React.Fragment>
           <img src={product.image} alt={product.title} style={styles.image} />
           <h2 style={styles.title}>{product.title}</h2>
           <p style={styles.price}>${product.price}</p>
           <p style={styles.description}>{product.description}</p>
+          {/* <button style={styles.button} onClick={}>
+            ⬅ Quay lại
+          </button> */}
+          <Button onClick={() => navigate(-1)}>⬅ Quay lại</Button>
         </React.Fragment>
       )}
     </div>
