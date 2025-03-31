@@ -1,39 +1,35 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { ShoppingCartIcon, ShoppingBagIcon } from "@heroicons/react/24/outline";
+
 import "../../styles/header.css";
 
-const styles = {
-  header: {
-    background: "#007bff",
-    padding: "15px",
-    textAlign: "center",
-  },
-  nav: {
-    display: "flex",
-    justifyContent: "center",
-    gap: "20px",
-  },
-  link: {
-    color: "#fff",
-    textDecoration: "none",
-    fontSize: "18px",
-    fontWeight: "bold",
-  },
-};
-
-const Header = () => {
+// Header Component
+const Header = ({ cartCount }) => {
   return (
-    <header style={styles.header}>
-      <nav style={styles.nav}>
-        <Link to="/" style={styles.link}>
-          Home
-        </Link>
-        <Link to="/about" style={styles.link}>
-          About
-        </Link>
-        <Link to="/contact" style={styles.link}>
-          Contact
-        </Link>
+    <header className="header-container">
+      <nav className="header-content">
+        <div className="brand-logo">
+          <ShoppingBagIcon className="icon-md text-primary" />
+          <span className="brand-name">Class 03</span>
+        </div>
+
+        <div className="nav-links">
+          <NavLink to="/products" className="nav-link">
+            Products
+          </NavLink>
+          <NavLink to="/cart" className="nav-link">
+            Cart
+          </NavLink>
+          <NavLink to="/orders" className="nav-link">
+            Orders
+          </NavLink>
+
+          <div className="cart-indicator">
+            <ShoppingCartIcon className="icon-md" />
+            <span className="cart-badge">{cartCount || 0}</span>
+          </div>
+        </div>
       </nav>
     </header>
   );
