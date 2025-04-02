@@ -1,7 +1,6 @@
 import Products from "../pages/Products";
-import Contact from "../pages/Contact";
-import About from "../pages/About";
 import ProductDetail from "../pages/ProductDetail";
+import Cart from "../pages/Cart";
 
 const publicRoutes = [
   {
@@ -12,13 +11,10 @@ const publicRoutes = [
     path: "products/:id/:slug",
     element: <ProductDetail />,
   },
+
   {
-    path: "/contact",
-    element: <Contact />,
-  },
-  {
-    path: "/about",
-    element: <About />,
+    path: "/cart",
+    element: <Cart />,
   },
 ];
 

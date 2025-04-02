@@ -10,9 +10,11 @@ import { generateSlug } from "../components/utils/slugUtils";
 import "../styles/products.css";
 import { truncateTitle } from "../components/utils/convertText";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
+import useCart from "../components/hooks/useCart";
 
 const Products = () => {
   const { products, isLoading } = useProducts();
+  const { addToCart } = useCart();
   return (
     <React.Fragment>
       <div className="container">
@@ -45,7 +47,10 @@ const Products = () => {
                   </div>
                 </div>
                 <div className="button-group">
-                  <button className="btn btn-primary">
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => addToCart(product)}
+                  >
                     <ShoppingCartIcon
                       style={{ width: "20px", marginRight: "8px" }}
                     />

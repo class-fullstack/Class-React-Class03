@@ -1,21 +1,30 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { ShoppingCartIcon, ShoppingBagIcon } from "@heroicons/react/24/outline";
 
 import "../../styles/header.css";
+import useCart from "../hooks/useCart";
 
 // Header Component
-const Header = ({ cartCount }) => {
+const Header = () => {
+  const navigate = useNavigate();
+  const { cartItems } = useCart();
+
   return (
     <header className="header-container">
       <nav className="header-content">
         <div className="brand-logo">
-          <ShoppingBagIcon className="icon-md text-primary" />
-          <span className="brand-name">Class 03</span>
+          <ShoppingBagIcon
+            className="icon-md text-primary"
+            onClick={() => navigate("/")}
+          />
+          <span className="brand-name" onClick={() => navigate("/")}>
+            Class 03
+          </span>
         </div>
 
         <div className="nav-links">
-          <NavLink to="/products" className="nav-link">
+          <NavLink to="/" className="nav-link">
             Products
           </NavLink>
           <NavLink to="/cart" className="nav-link">
@@ -26,8 +35,11 @@ const Header = ({ cartCount }) => {
           </NavLink>
 
           <div className="cart-indicator">
-            <ShoppingCartIcon className="icon-md" />
-            <span className="cart-badge">{cartCount || 0}</span>
+            <ShoppingCartIcon
+              className="icon-md"
+              onClick={() => navigate("/cart")}
+            />
+            <span className="cart-badge">{cartItems?.cart?.length || 0}</span>
           </div>
         </div>
       </nav>
