@@ -2,7 +2,7 @@ import Order from "../pages/Order";
 
 const privateRoutes = [
   {
-    index: true,
+    path: "/orders",
     element: <Order />,
   },
 ];

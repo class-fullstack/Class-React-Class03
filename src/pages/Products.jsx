@@ -3,10 +3,10 @@ import {
   ShoppingCartIcon,
   InformationCircleIcon,
 } from "@heroicons/react/24/outline";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import useProducts from "../components/hooks/useProduct";
-import { generateSlug } from "../components/utils/slugUtils";
+import { generateSlug } from "../components/utils/slug";
 import "../styles/products.css";
 import { truncateTitle } from "../components/utils/convertText";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
@@ -14,6 +14,7 @@ import useCart from "../components/hooks/useCart";
 
 const Products = () => {
   const { products, isLoading } = useProducts();
+  const navigate = useNavigate();
   const { addToCart } = useCart();
   return (
     <React.Fragment>
@@ -32,7 +33,14 @@ const Products = () => {
               </div>
 
               <div className="product-info">
-                <h3 className="product-title">
+                <h3
+                  className="product-title"
+                  onClick={() =>
+                    navigate(
+                      `/products/${product.id}/${generateSlug(product.title)}`
+                    )
+                  }
+                >
                   {truncateTitle(product.title, 23)}
                 </h3>
 

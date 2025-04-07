@@ -12,7 +12,7 @@ const router = createBrowserRouter([
     children: [...publicRoutes],
   },
   {
-    path: "/private",
+    path: "",
     element: <PrivateLayout />,
     children: [...privateRoutes],
   },

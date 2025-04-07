@@ -1,0 +1,130 @@
+/* File: src/styles/order-success.css */
+.order-success-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem;
+    background-color: #f8fafc;
+}
+
+.order-success-card {
+    position: relative;
+    z-index: 2;
+    /* Đảm bảo card hiển thị trên pháo hoa */
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    background: white;
+    padding: 3rem;
+    border-radius: var(--cart-radius);
+    box-shadow: var(--cart-shadow);
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+    border: 1px solid var(--cart-border);
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    color: var(--cart-success);
+    margin: 0 auto 1.5rem;
+    filter: drop-shadow(0 4px 6px rgba(16, 185, 129, 0.15));
+}
+
+.success-title {
+    font-size: 2.5rem;
+    color: var(--cart-text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.success-subtitle {
+    color: var(--cart-text-light);
+    margin-bottom: 2.5rem;
+    font-size: 1.1rem;
+}
+
+.order-details {
+    background: #f8fafc;
+    border-radius: var(--cart-radius);
+    padding: 1.5rem;
+    margin: 2rem 0;
+    text-align: left;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.75rem 0;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--cart-border);
+}
+
+.detail-label {
+    color: var(--cart-text-light);
+    font-weight: 500;
+}
+
+.detail-value {
+    color: var(--cart-text-dark);
+    font-weight: 600;
+}
+
+.continue-shopping-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    background: var(--cart-primary);
+    color: white;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    margin: 1.5rem 0;
+}
+
+.continue-shopping-btn:hover {
+    background: var(--cart-primary-dark);
+    transform: translateY(-1px);
+}
+
+.btn-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.order-footer {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--cart-border);
+}
+
+.footer-icon {
+    width: 40px;
+    height: 40px;
+    color: var(--cart-primary);
+    margin-bottom: 1rem;
+}
+
+.footer-text {
+    color: var(--cart-text-light);
+    line-height: 1.6;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .order-success-card {
+        padding: 2rem;
+    }
+
+    .success-title {
+        font-size: 2rem;
+    }
+
+    .continue-shopping-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}

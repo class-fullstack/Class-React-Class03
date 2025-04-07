@@ -15,9 +15,11 @@ import paypal from "../assets/svgs/paypal.svg";
 
 import "../styles/cart.css";
 import useCart from "../components/hooks/useCart";
+import LoadingSpinner from "../components/ui/LoadingSpinner";
 
 const Cart = () => {
-  const { cartItems, updateQuantity, removeFromCart } = useCart();
+  const [isLoading, setLoading] = React.useState(false);
+  const { cartItems, removeFromCart, increment, decrement } = useCart();
   const navigate = useNavigate();
 
   const subtotal = cartItems.cart.reduce(
@@ -35,6 +37,15 @@ const Cart = () => {
     exit: { opacity: 0, x: -50 },
   };
 
+  const handleOrder = () => {
+    setLoading(true);
+
+    setTimeout(() => {
+      setLoading(false);
+      navigate("/orders");
+    }, 4000);
+  };
+
   return (
     <div className="cart-page">
       <header className="cart-header">
@@ -42,8 +53,8 @@ const Cart = () => {
           onClick={() => navigate("/")}
           className="back-button cart-back-btn"
         >
-          <ArrowLeftIcon className="icon-sm" />
-          Back to Products
+          <ArrowLeftIcon className="icon-md" />
+          Back
         </button>
         <h1 className="cart-main-title">Your Shopping Cart</h1>
         <div className="cart-stats">
@@ -132,11 +143,11 @@ const Cart = () => {
                       <div className="cart-quantity-controls">
                         <motion.button
                           whileTap={{ scale: 0.9 }}
-                          onClick={() =>
-                            updateQuantity(item.id, item.quantity - 1)
-                          }
+                          onClick={() => decrement(item.id)}
                           disabled={item.quantity <= 1}
-                          className="cart-qty-btn"
+                          className={`cart-qty-btn ${
+                            item.quantity <= 1 ? "disabled" : ""
+                          }`}
                           aria-label="Decrease quantity"
                         >
                           <MinusCircleIcon className="cart-icon-sm" />
@@ -144,9 +155,7 @@ const Cart = () => {
                         <span className="cart-qty-value">{item.quantity}</span>
                         <motion.button
                           whileTap={{ scale: 0.9 }}
-                          onClick={() =>
-                            updateQuantity(item.id, item.quantity + 1)
-                          }
+                          onClick={() => increment(item.id)}
                           className="cart-qty-btn"
                           aria-label="Increase quantity"
                         >
@@ -212,13 +221,18 @@ const Cart = () => {
                   <span>${total.toFixed(2)}</span>
                 </div>
 
-                <motion.button
-                  className="cart-checkout-btn"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  Checkout
-                </motion.button>
+                {isLoading ? (
+                  <LoadingSpinner />
+                ) : (
+                  <motion.button
+                    className="cart-checkout-btn"
+                    whileHover={{ scale: 1.02 }}
+                    onClick={handleOrder}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    Checkout
+                  </motion.button>
+                )}
 
                 <div className="cart-payment-methods">
                   <img src={visa} alt="Visa" className="cart-payment-logo" />

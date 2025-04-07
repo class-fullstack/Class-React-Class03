@@ -3,14 +3,17 @@ import React from "react";
 import axios from "axios";
 import { ShoppingCartIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import Zoom from "react-medium-image-zoom";
-import "react-medium-image-zoom/dist/styles.css";
+
 import "../styles/product.css";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
+import useCart from "../components/hooks/useCart";
 const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [product, setProduct] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
+
+  const { addToCart } = useCart();
 
   React.useEffect(() => {
     setIsLoading(true);
@@ -22,7 +25,6 @@ const ProductDetail = () => {
       })
       .catch((error) => {
         setIsLoading(false);
-        console.error("Error fetching product:", error);
       });
     return () => {
       setProduct(null);
@@ -33,8 +35,8 @@ const ProductDetail = () => {
     <div className="container">
       <div className="product-detail-container">
         <button onClick={() => navigate(-1)} className="back-button">
-          <ArrowLeftIcon className="icon-sm" />
-          Back to Products
+          <ArrowLeftIcon className="icon-md" />
+          Back
         </button>
 
         {isLoading && <LoadingSpinner />}
@@ -79,7 +81,10 @@ const ProductDetail = () => {
               </div>
 
               <div className="action-buttons">
-                <button className="btn btn-primary btn-lg">
+                <button
+                  className="btn btn-primary btn-lg"
+                  onClick={() => addToCart(product)}
+                >
                   <ShoppingCartIcon className="icon-md" />
                   Add to Cart
                 </button>
