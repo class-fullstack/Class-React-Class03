@@ -11,15 +11,21 @@ import "../styles/products.css";
 import { truncateTitle } from "../components/utils/convertText";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
 import useCart from "../components/hooks/useCart";
+import SearchAndFilter from "../components/ui/SearchAndFilter";
+import LoadMore from "../components/ui/Loadmore";
 
 const Products = () => {
   const { products, isLoading } = useProducts();
   const navigate = useNavigate();
   const { addToCart } = useCart();
+
   return (
     <React.Fragment>
       <div className="container">
+        {/* Add search and filter component */}
+        <SearchAndFilter />
         {isLoading && <LoadingSpinner />}
+
         <div className="products-grid">
           {products.map((product) => (
             <div key={product.id} className="product-card">
@@ -80,6 +86,7 @@ const Products = () => {
             </div>
           ))}
         </div>
+        <LoadMore />
       </div>
     </React.Fragment>
   );

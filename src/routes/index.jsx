@@ -4,16 +4,25 @@ import privateRoutes from "./privateRoutes";
 import NotFound from "../pages/404-NotFound";
 import PublicLayout from "../components/layout/PublicLayout";
 import PrivateLayout from "../components/layout/PrivateLayout";
+import ScrollToTop from "../components/ui/ScrollToTop";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <PublicLayout />,
+    element: (
+      <ScrollToTop>
+        <PublicLayout />
+      </ScrollToTop>
+    ),
     children: [...publicRoutes],
   },
   {
     path: "",
-    element: <PrivateLayout />,
+    element: (
+      <ScrollToTop>
+        <PrivateLayout />
+      </ScrollToTop>
+    ),
     children: [...privateRoutes],
   },
   ,

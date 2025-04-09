@@ -167,6 +167,9 @@ body {
     color: var(--primary);
 }
 
+
+
+
 /* Responsive Design */
 @media (min-width: 640px) {
     .products-grid {
